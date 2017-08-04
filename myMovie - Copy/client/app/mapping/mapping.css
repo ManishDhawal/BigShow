@@ -1,0 +1,28 @@
+#exTab2 .zak > li > a {
+  border-radius: 4px 4px 0 0 ;
+  color: #fff;
+}
+
+#exTab2 .zak > li > a:hover {
+  color: black;
+  cursor: pointer;
+}
+
+#exTab2 {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#exTab2 .tab-content {
+
+  background-color: #F0FFFF;
+  color: black;
+  padding : 5px 15px;
+  border: none;
+  border-radius: 3px;
+}
+
+.biba {
+  padding-top: 30px;
+  padding-bottom: 50px;
+}

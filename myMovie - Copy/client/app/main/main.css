@@ -1,0 +1,144 @@
+.bu {
+  display: block;
+  border-top: 5px solid orange;
+
+  margin-bottom: 10px;
+}
+
+.zu {
+  margin-bottom: 30px;
+}
+
+.zu h3 {
+  margin-bottom: 5px;
+}
+
+
+.jha {
+  float: right;
+  clear: both;
+}
+
+.cont {
+    position: relative;
+    width: 100%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.overlay {
+  transition: .3s ease;
+  opacity: 1;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.cont:hover .image {
+  opacity: 0.2;
+}
+
+.cont:hover .overlay {
+  opacity: 1;
+  top: 70%;
+}
+
+.text {
+  color: white;
+  font-size: 40px;
+  padding: 16px 32px;
+  letter-spacing: 2px;
+}
+
+.text1 {
+  display: block;
+  width: 100%;
+  background-color: rgb(123, 126, 130, 0.2);
+  color: white;
+  font-size: 25px;
+  padding: 16px 32px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.rowa {
+  margin-bottom: 0px;
+}
+.cola {
+  margin-right: 0px;
+
+  padding-right: 0px;
+
+}
+.cola1 {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.colu {
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+ .item img {
+  width: 800px !important;
+  height: 450px !important;
+}
+
+.coco {
+  display: block;
+  border-top: 4px solid deepskyblue;
+}
+
+.carousel-caption {
+  color: black;
+}
+
+.carousel-caption h2 {
+  display: block;
+  padding: 2px 2px 2px 2px;
+  background-color: gold;
+  border: none;
+  border-radius: 3px;
+}
+
+.carousel-caption button {
+  color: black;
+}
+
+.well2 {
+  padding: 4px 4px 4px 4px;
+  text-align: center;
+  display: block;
+  margin-bottom: 3px;
+  background-color: #d7263d;
+  border-top: 3px solid deepskyblue; ;
+  border-radius: 4px;
+}
+
+.well2 select {
+  left: 10px;
+  border-radius: 2px;
+  text-align: center;
+  margin-bottom: 9px;
+  padding: 4px 4px 4px 4px;
+}
+
+select {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.offer-image img {
+  width: 360px;
+  height: 360px;
+}

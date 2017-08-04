@@ -1,0 +1,33 @@
+.panel {
+  color: black;
+}
+
+.card-input {
+  width: 300px;
+}
+.cvv {
+  width: 100px;
+}
+#lock {
+  margin-right: 10px;
+}
+
+.tiles {
+  margin-bottom: 20px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.modal-header {
+  background-color: deepskyblue;
+  color: #fff;
+  text-align: center;
+}
+
+.modal-content {
+  color: black;
+  text-align: center;
+}

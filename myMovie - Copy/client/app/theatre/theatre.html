@@ -1,0 +1,355 @@
+<!--<div class="container">
+	<div class="row">
+        <div class="col-lg-12 bhoechie-tab-container" style="margin-left:0px;">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+              <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  <h4 class="glyphicon glyphicon-plus"></h4><br/>Add New Theatre
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="glyphicon glyphicon-trash"></h4><br/>Delete Theatre Details
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="glyphicon glyphicon-random"></h4><br/>Map New Movie
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="glyphicon glyphicon-edit"></h4><br/>Edit Movie Mapping Details
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="glyphicon glyphicon-time"></h4><br/>Modify Show Date / Timings
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="glyphicon glyphicon-remove"></h4><br/>Remove Movie from Theatre
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+
+                <div class="bhoechie-tab-content active">
+
+                      <div class="form-group">
+                    			<label for="Name">Theatre Name</label>
+                    			<input type="text" class="form-control" placeholder="Theatre Name" ng-model="theatreCtrl.Theatre"/>
+                    	</div>
+                      <div class="form-group">
+                    			<label for="language">Location</label>
+                    			<input type="text" class="form-control" placeholder="Location" ng-model="theatreCtrl.Locality"/>
+                    	</div>
+                      <div class="form-group">
+                    			<label for="language">City</label>
+                    			<input type="text" class="form-control" placeholder="City" ng-model="theatreCtrl.City"/>
+                    	</div>
+
+                      <div class="row">
+                    		<div class="col-md-12">
+                          <hr/>
+                          <div class="form-group text-center">
+                        			<button class="btn btn-success btn-lg" type="submit" ng-click="theatreCtrl.addTheatre()">Add Theatre</button>
+                        	</div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="bhoechie-tab-content">
+              <select class="form-control" ng-model="theatreCtrl.cityfilter" ng-options="x.City for x in theatreCtrl.theatre">
+                    <option value="">Select City</select>
+                  </select>
+                  <table class="table table-default">
+                    <thead>
+                    <tr>
+                      <th>Theatre Name</th>
+                      <th>Locality</th>
+                      <th>City</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in theatreCtrl.TheatreDetails">
+                      <td>{{x.TheatreName}}</td>
+                      <td>{{x.Locality}}</td>
+                      <td>{{x.City}}</td>
+                      <td><button type="submit" class="btn btn-danger glyphicon glyphicon-trash" ng-click="theatreCtrl.removeTheatre(x)"></button></td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+
+
+                <div class="bhoechie-tab-content">
+                  <label>Movie Name</label>
+                    <select class="form-control" ng-model="theatreCtrl.movieName">
+                      <option ng-repeat="x in theatreCtrl.MovieData">{{x.Title}}</option>
+                    </select><br/>
+                    <label>City Name</label>
+                      <select class="form-control" ng-model="theatreCtrl.City" ng-change="theatreCtrl.checkMovie()">
+                        <option ng-repeat="x in theatreCtrl.TheatreDetails">{{x.City}}</option>
+                      </select><br/>
+                      <table width="100%" style="text-align:center">
+                        <tr><td>
+                          <label>Available Theatre(s)</label><br/>
+                 <select id="theatrenames" multiple="true" size="8" style="width:350px;" ng-model="theatreCtrl.alltheatres">
+                   <option ng-show="theatreCtrl.City" ng-repeat="x in theatreCtrl.TheatreDetails | filter: {'City': theatreCtrl.City} | orderBy:'TheatreName'">{{x.TheatreName}}: {{x.Locality}}</option>
+                 </select>
+               </td>
+               <td>
+                 <button type="button" id="addSingleButton">&nbsp;&gt;&nbsp;</button><br/>
+                 <button type="button" id="removeSingleButton">&nbsp;&lt;&nbsp;</button><br/>
+                 <button type="button" id="addAllButton">&gt;&gt;</button><br/>
+                 <button type="button" id="removeAllButton">&lt;&lt;</button>
+               </td>
+               <td>
+                 <label>Selected Theatre(s)</label><br/>
+                 <select id="selectedtheatrenames" multiple="true" size="8" style="width:350px">
+                 </select>
+                    </td></tr>
+                  </table>
+                  <br/>
+                     <label>Select Date(s)</label>
+                    <ul id="MovieDates" class="nav nav-pills">
+                      <li ng-repeat="dt in theatreCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+                    </ul>
+                      <br/>
+                 <div class="form-group">
+                  <label for="language">Show Timings</label>
+                  <p class="input-group">
+                    <select id="hours"><option>HH</option></select>
+                    <select id="minutes"><option>MM</option></select>
+                    <select id="ampm">
+                      <option>PM</option>
+                      <option>AM</option>
+                    </select>&nbsp;
+                    <button id="AddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+                  </p>
+                </div>
+                <ul id="ShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+
+                </ul>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <hr/>
+                    <div class="form-group text-center">
+                        <button class="btn btn-success btn-lg" id="SaveMappingButton" ng-click="theatreCtrl.saveMappingDetails()">Save Mapping Details</button>
+                    </div>
+                  </div>
+                </div>
+
+                </div>
+
+
+                <div class="bhoechie-tab-content">
+                  <label>Movie Name</label>
+                    <select class="form-control" id="editMovieName" ng-model="theatreCtrl.EditMovieName">
+                      <option ng-repeat="x in theatreCtrl.MovieMapping">{{x.MovieName}}</option>
+                    </select><br/>
+                    <label>City Name</label>
+                      <select class="form-control" id="editCityName" ng-model="theatreCtrl.EditCityName">
+                        <option ng-repeat="theatre in theatreCtrl.MovieMapping">{{theatre.City}}</option>
+                      </select><br/>
+                      <button class="btn btn-default" id="FetchButton" ng-click="theatreCtrl.getMovieMappingDetails()" ng-model="theatreCtrl.fetchModel">Fetch Details</button>
+                      <table width="100%" style="text-align:center">
+                        <tr>
+
+                          <td>
+                          <label>Mapped Theatre(s)</label><br/>
+                 <select id="edittheatrenames" multiple="true" size="8" style="width:350px;">
+                 </select>
+               </td>
+               <td>
+                 <button type="button" id="editaddSingleButton">&nbsp;&gt;&nbsp;</button><br/>
+                 <button type="button" id="editremoveSingleButton">&nbsp;&lt;&nbsp;</button><br/>
+               </td>
+               <td>
+                 <label>Selected Theatre(s)</label><br/>
+                 <select id="editselectedtheatrenames" multiple="true" size="8" style="width:350px">
+                 </select>
+                    </td>
+                  </tr>
+                  </table>
+                  <br/>
+                     <label>Select Date(s)</label>
+                    <ul id="editMovieDates" class="nav nav-pills">
+                      <li ng-repeat="dt in theatreCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+                    </ul>
+                      <br/>
+                 <div class="form-group">
+                  <label for="language">Show Timings</label>
+                  <p class="input-group">
+                    <select id="edithours"><option>HH</option></select>
+                    <select id="editminutes"><option>MM</option></select>
+                    <select id="editampm">
+                      <option>PM</option>
+                      <option>AM</option>
+                    </select>&nbsp;
+                    <button id="editAddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+                  </p>
+                </div>
+                <ul id="EditShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+                </ul>
+                <div class="row">
+                  <div class="col-md-12">
+                    <hr/>
+                    <div class="form-group text-center">
+                        <button class="btn btn-success btn-lg" id="UpdateMappingButton" ng-click="$ctrl.saveUpdateMappingDetails()">Update Mapping Details</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+
+                <div class="bhoechie-tab-content">
+                  <select class="form-control" ng-model="theatreCtrl.sdtCityName">
+                      <option value="">Select City Name</option>
+                      <option ng-repeat="t in theatreCtrl.movieMap | unique: 'City'">{{t.City}}</option>
+                  </select><br/>
+                  <select class="form-control" ng-model="theatreCtrl.sdtMovieName">
+                      <option value="">Select Movie Name</option>
+                      <option ng-show="theatreCtrl.sdtCityName" ng-repeat="t in theatreCtrl.movieMap | unique: 'MovieName' | filter: {'City': theatreCtrl.sdtCityName}">{{t.MovieName}}</option>
+                  </select><br/>
+                  <select class="form-control" ng-model="theatreCtrl.sdtTheatreName" ng-change="theatreCtrl.getstDetails()">
+                    <option value="">Select Theatre Name</option>
+                    <option ng-show="theatreCtrl.sdtMovieName" ng-repeat="t in theatreCtrl.movieMap | filter: {'City': theatreCtrl.sdtCityName} | filter: {'MovieName': theatreCtrl.sdtMovieName}">{{t.TheatreName}}</option>
+                  </select>
+                  <br/>
+                     <label>Select Date(s)</label>
+                    <ul id="stMovieDates" class="nav nav-pills">
+                      <li ng-repeat="dt in theatreCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+                    </ul>
+                      <br/>
+                 <div class="form-group">
+                  <label for="language">Show Timings</label>
+                  <p class="input-group">
+                    <select id="stedithours"><option>HH</option></select>
+                    <select id="steditminutes"><option>MM</option></select>
+                    <select id="steditampm">
+                      <option>PM</option>
+                      <option>AM</option>
+                    </select>&nbsp;
+                    <button id="steditAddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+                  </p>
+                </div>
+                <ul id="stEditShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+                </ul>
+                <div class="row">
+                  <div class="col-md-12">
+                    <hr/>
+                    <div class="form-group text-center">
+                        <button class="btn btn-success btn-lg" id="UpdateSTButton" ng-click="theatreCtrl.updateSTDetails()">Save Details</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+
+                <div class="bhoechie-tab-content">
+                  <select class="form-control" ng-model="theatreCtrl.removecityfilter">
+                      <option value="">Select City Name</option>
+                      <option ng-repeat="t in theatreCtrl.MovieMapping">{{t.City}}</option>
+                  </select><br/>
+                  <select class="form-control" ng-model="theatreCtrl.removemoviefilter">
+                    <option value="">Select Movie Name</option>
+                      <option ng-show="theatreCtrl.removecityfilter" ng-repeat="t in theatreCtrl.MovieMapping | filter: {'City': theatreCtrl.removecityfilter}">{{t.MovieName}}</option>
+                  </select>
+                  <table class="table table-default" ng-show="theatreCtrl.removemoviefilter">
+                    <thead>
+                    <tr>
+                      <th>Movie Name</th>
+                      <th>Theatre Name</th>
+                      <th>City</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in theatreCtrl.MovieMapping | filter: {'City': theatreCtrl.removecityfilter} | filter: {'MovieName': theatreCtrl.removemoviefilter}">
+                      <td>{{x.MovieName}}</td>
+                      <td>{{x.TheatreName}}</td>
+                      <td>{{x.City}}</td>
+                      <td><button type="submit" class="btn btn-danger glyphicon glyphicon-trash" ng-click="theatreCtrl.removeMapping(x)"></button></td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+  </div>
+</div> -->
+
+<!-- nav-pills approach -->
+
+<div class="container"><h2 style="letter-spacing: 2px;">Manage Theatre Details Here!</h2>
+		<div id="exTab3">
+				<ul  class="nav nav-pills">
+						<li class="active">
+								<a  data-target="#1b" data-toggle="tab"><span class="glyphicon glyphicon-star"></span> Add New Theatre</a>
+						</li>
+						<li><a data-target="#2b" data-toggle="tab"> <span class="glyphicon glyphicon-trash"></span> Delete Theatre Details</a>
+						</li>
+				</ul>
+
+<div class="tab-content clearfix">
+
+
+		<div class="tab-pane active" id="1b">
+				<div class="tik">
+						<div class="form-group">
+							<label for="Name">Theatre Name</label>
+								<input type="text" class="form-control" placeholder="Theatre Name" ng-model="theatreCtrl.Theatre"/>
+						</div>
+						<div class="form-group">
+							<label for="language">Location</label>
+								<input type="text" class="form-control" placeholder="Location" ng-model="theatreCtrl.Locality"/>
+						</div>
+						<div class="form-group">
+							<label for="language">City</label>
+								<input type="text" class="form-control" placeholder="City" ng-model="theatreCtrl.City"/>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+										<hr/>
+								<div class="form-group text-center">
+									<button class="btn btn-success btn-lg" type="submit" ng-click="theatreCtrl.addTheatre()">Add Theatre</button>
+								</div>
+							</div>
+						</div>
+				</div>
+		</div> <!-- end of tab 1 -->
+
+
+<div class="tab-pane" id="2b">
+	<div class="tik">
+	<table class="table table-default">
+		<thead>
+		<tr>
+			<th>Theatre Name</th>
+			<th>Locality</th>
+			<th>City</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="x in theatreCtrl.TheatreDetails">
+			<td>{{x.TheatreName}}</td>
+			<td>{{x.Locality}}</td>
+			<td>{{x.City}}</td>
+			<td><button type="submit" class="btn btn-danger glyphicon glyphicon-trash" ng-click="theatreCtrl.removeTheatre(x)"></button></td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+</div> <!-- end of tab 2 -->
+
+</div>
+</div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+});
+</script>

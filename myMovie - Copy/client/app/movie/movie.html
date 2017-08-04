@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 style="letter-spacing: 2px; text-transform: uppercase;">Manage Movies in Database!</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" ng-model="movieCtrl.MovieName" placeholder="Movie Name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="movieCtrl.Year" placeholder="Year" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-warning" ng-click="movieCtrl.SearchMovie()">Search</button>
+        <button class="btn btn-success" ng-click="movieCtrl.addMovie()">Add Movie</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-default" >
+        <tr>
+          <th>Poster</th>
+          <th>Title</th>
+          <th>Actors</th>
+          <th>Duration</th>
+          <th>Genre</th>
+          <th>Director</th>
+        </tr>
+        <tr>
+          <td rowspan="2"><img src="{{movieCtrl.MovieDetails.cov}}" width="80%"></td>
+          <td>{{movieCtrl.MovieDetails.title}}</td>
+          <td>{{movieCtrl.MovieDetails.cast}}</td>
+          <td>{{movieCtrl.MovieDetails.dur}}</td>
+          <td>{{movieCtrl.MovieDetails.gen}}</td>
+          <td>{{movieCtrl.MovieDetails.director}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Movies in the database</h3>
+
+      <table class="table table-default">
+        <tr>
+          <th>Title</th>
+          <th>Cast</th>
+          <th>Duration</th>
+          <th>Genre</th>
+          <th>Director</th>
+          <th>options</th>
+        </tr>
+        <tr ng-repeat="x in movieCtrl.MovieDetails">
+
+          <td>{{x.Title}}</td>
+          <td>{{x.Actors}}</td>
+          <td>{{x.Duration}}</td>
+          <td>{{x.Genre}}</td>
+          <td>{{x.Director}}</td>
+          <td><button ng-click="movieCtrl.removeMovie(x)" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

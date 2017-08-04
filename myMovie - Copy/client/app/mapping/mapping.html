@@ -1,0 +1,491 @@
+<div class="container">
+  <h2 style="letter-spacing: 2px;">Manage Movie Mapping Details Here!</h2>
+
+  <div id="exTab2">
+  <ul  class="nav nav-pills zak">
+  <li class="active">
+  <a  data-target="#1b" data-toggle="tab"> <span class="glyphicon glyphicon-transfer"></span> Map a Movie</a>
+  </li>
+  <li><a data-target="#2b" data-toggle="tab"> <span class="glyphicon glyphicon-edit"></span> Edit Movie Mapping</a>
+  </li>
+  <li><a data-target="#3b" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Modify Show Date / Timings</a>
+  </li>
+  <li><a data-target="#4b" data-toggle="tab"><span class="glyphicon glyphicon-remove"></span> Remove Mapped Movie</a>
+  </li>
+  </ul>
+
+  <div class="tab-content clearfix">
+
+  <!-- map a movie -->
+  <div class="tab-pane active" id="1b">
+    <div class="biba">
+      <label>Movie Name</label>
+        <select class="form-control" ng-model="mappingCtrl.movieName">
+          <option ng-repeat="x in mappingCtrl.SavedMovies">{{x.Title}}</option>
+        </select><br/>
+        <label>City Name</label>
+          <select class="form-control" ng-model="mappingCtrl.City" ng-change="mappingCtrl.checkMovie()">
+            <option ng-repeat="x in mappingCtrl.SavedTheatres">{{x.City}}</option>
+          </select><br/>
+          <table width="100%" style="text-align:center">
+            <tr><td>
+              <label>Available Theatre(s)</label><br/>
+     <select id="theatrenames" multiple="true" size="8" style="width:350px;" ng-model="mappingCtrl.alltheatres">
+       <option ng-show="mappingCtrl.City" ng-repeat="x in mappingCtrl.SavedTheatres | filter: {'City': mappingCtrl.City} | orderBy:'TheatreName'">{{x.TheatreName}}: {{x.Locality}}</option>
+     </select>
+   </td>
+   <td>
+     <button type="button" id="addSingleButton">&nbsp;&gt;&nbsp;</button><br/>
+     <button type="button" id="removeSingleButton">&nbsp;&lt;&nbsp;</button><br/>
+     <button type="button" id="addAllButton">&gt;&gt;</button><br/>
+     <button type="button" id="removeAllButton">&lt;&lt;</button>
+   </td>
+   <td>
+     <label>Selected Theatre(s)</label><br/>
+     <select id="selectedtheatrenames" multiple="true" size="8" style="width:350px">
+     </select>
+        </td></tr>
+      </table>
+      <br/>
+         <label>Select Date(s)</label>
+        <ul id="MovieDates" class="nav nav-pills">
+          <li ng-repeat="dt in mappingCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+        </ul>
+          <br/>
+     <div class="form-group">
+      <label for="language">Show Timings</label>
+      <p class="input-group">
+        <select id="hours"><option>HH</option></select>
+        <select id="minutes"><option>MM</option></select>
+        <select id="ampm">
+          <option>PM</option>
+          <option>AM</option>
+        </select>&nbsp;
+        <button id="AddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+      </p>
+    </div>
+    <ul id="ShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+
+    </ul>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="form-group text-center">
+            <button class="btn btn-success btn-lg" id="SaveMappingButton" ng-click="mappingCtrl.saveMappingDetails()">Save Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Edit mapping Details -->
+  <div class="tab-pane" id="2b">
+    <div class="biba">
+      <label>Movie Name</label>
+        <select class="form-control" id="editMovieName" ng-model="mappingCtrl.EditMovieName">
+          <option ng-repeat="x in mappingCtrl.MovieMapping">{{x.MovieName}}</option>
+        </select><br/>
+        <label>City Name</label>
+          <select class="form-control" id="editCityName" ng-model="mappingCtrl.EditCityName">
+            <option ng-repeat="theatre in mappingCtrl.MovieMapping">{{theatre.City}}</option>
+          </select><br/>
+          <button class="btn btn-default" id="FetchButton" ng-click="mappingCtrl.getMovieMappingDetails()" ng-model="mappingCtrl.fetchModel">Fetch Details</button>
+          <table width="100%" style="text-align:center">
+            <tr>
+
+              <td>
+              <label>Avalaible Theatre(s)</label><br/>
+     <select id="edittheatrenames" multiple="true" size="8" style="width:350px;">
+     </select>
+   </td>
+   <td>
+     <button type="button" id="editaddSingleButton">&nbsp;&gt;&nbsp;</button><br/>
+     <button type="button" id="editremoveSingleButton">&nbsp;&lt;&nbsp;</button><br/>
+   </td>
+   <td>
+     <label>Selected Theatre(s)</label><br/>
+     <select id="editselectedtheatrenames" multiple="true" size="8" style="width:350px">
+     </select>
+        </td>
+      </tr>
+      </table>
+      <br/>
+         <label>Select Date(s)</label>
+        <ul id="editMovieDates" class="nav nav-pills">
+          <li ng-repeat="dt in mappingCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+        </ul>
+          <br/>
+     <div class="form-group">
+      <label for="language">Show Timings</label>
+      <p class="input-group">
+        <select id="edithours"><option>HH</option></select>
+        <select id="editminutes"><option>MM</option></select>
+        <select id="editampm">
+          <option>PM</option>
+          <option>AM</option>
+        </select>&nbsp;
+        <button id="editAddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+      </p>
+    </div>
+    <ul id="EditShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+    </ul>
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="form-group text-center">
+            <button class="btn btn-warning btn-lg" id="UpdateMappingButton" ng-click="mappingCtrl.saveUpdateMappingDetails()">Update Details</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modify Show and Date / Timings -->
+  <div class="tab-pane" id="3b">
+    <div class="biba">
+      <label>Select City</label>
+      <select class="form-control" ng-model="mappingCtrl.sdtCityName">
+          <option value="">Select City Name</option>
+          <option ng-repeat="t in mappingCtrl.MovieMapping">{{t.City}}</option>
+      </select><br/>
+      <label>Select Movie</label>
+      <select class="form-control" ng-model="mappingCtrl.sdtMovieName">
+          <option value="">Select Movie Name</option>
+          <option ng-show="mappingCtrl.sdtCityName" ng-repeat="t in mappingCtrl.MovieMapping | filter: {'City': mappingCtrl.sdtCityName}">{{t.MovieName}}</option>
+      </select><br/>
+      <label>Select Theatre</label>
+      <select class="form-control" ng-model="mappingCtrl.sdtTheatreName" ng-change="mappingCtrl.getstDetails()">
+        <option value="">Select Theatre Name</option>
+        <option ng-show="mappingCtrl.sdtMovieName" ng-repeat="t in mappingCtrl.MovieMapping | filter: {'City': mappingCtrl.sdtCityName} | filter: {'MovieName': mappingCtrl.sdtMovieName}">{{t.TheatreName}}</option>
+      </select>
+      <br/>
+         <label>Select Date(s)</label>
+        <ul id="stMovieDates" class="nav nav-pills">
+          <li ng-repeat="dt in mappingCtrl.movDates"><a href="#"><span class="glyphicon glyphicon-calendar"></span> {{dt | date:'dd MMM yy'}}</a></li>
+        </ul>
+          <br/>
+     <div class="form-group">
+      <label for="language">Show Timings</label>
+      <p class="input-group">
+        <select id="stedithours"><option>HH</option></select>
+        <select id="steditminutes"><option>MM</option></select>
+        <select id="steditampm">
+          <option>PM</option>
+          <option>AM</option>
+        </select>&nbsp;
+        <button id="steditAddButton" type="button" class="btn btn-primary btn-sm">Add New</button>
+      </p>
+    </div>
+    <ul id="stEditShowTime" class="nav navbar-nav col-md-8 col-lg-8 col-sm-8">
+    </ul>
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="form-group text-center">
+            <button class="btn btn-success btn-lg" id="UpdateSTButton" ng-click="mappingCtrl.updateSTDetails()">Save Details</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <!-- remove movie mapping -->
+  	<div class="tab-pane" id="4b">
+      <div class="biba">
+        <label>Select City</label>
+        <select class="form-control" ng-model="mappingCtrl.removecityfilter">
+            <option value="">Select City Name</option>
+            <option ng-repeat="t in mappingCtrl.MovieMapping">{{t.City}}</option>
+        </select><br/>
+        <label>Select Movie</label>
+        <select class="form-control" ng-model="mappingCtrl.removemoviefilter">
+          <option value="">Select Movie Name</option>
+            <option ng-show="mappingCtrl.removecityfilter" ng-repeat="t in mappingCtrl.MovieMapping | filter: {'City': mappingCtrl.removecityfilter}">{{t.MovieName}}</option>
+        </select>
+        <table class="table table-default" ng-show="mappingCtrl.removemoviefilter">
+          <thead>
+          <tr>
+            <th>Movie Name</th>
+            <th>Theatre Name</th>
+            <th>City</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in mappingCtrl.MovieMapping | filter: {'City': mappingCtrl.removecityfilter} | filter: {'MovieName': mappingCtrl.removemoviefilter}">
+            <td>{{x.MovieName}}</td>
+            <td>{{x.TheatreName}}</td>
+            <td>{{x.City}}</td>
+            <td><button type="submit" class="btn btn-danger glyphicon glyphicon-trash" ng-click="mappingCtrl.removeMapping(x)"></button></td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<script>
+var showTimings=[];
+var selectedDates=[];
+var selectedTheatres=[];
+var editAllTheatres=[];
+var editshowTimings=[];
+var editselectedDates=[];
+var editselectedTheatres=[];
+var editnewselectedTheatres=[];
+var stData=[];
+var stDates=[];
+var stShowTimings=[];
+
+
+$(document).ready(function(){
+//Resetting Mapping Details form
+  $("#SaveMappingButton").click(function(){
+    $("#MovieDates.nav-pills>li").removeClass("active");
+    $("#ShowTime").empty();
+    var elem = document.getElementById("theatrenames").options;
+    for(var i = 0; i < elem.length; i++){
+      elem[i].selected = false;
+    }
+    $('#hours option')[0].selected = true;
+    $('#minutes option')[0].selected = true;
+    $('#ampm option')[0].selected = true;
+    showTimings=[];
+    selectedDates=[];
+    selectedTheatres=[];
+    $("#selectedtheatrenames").find('option').remove();
+  });
+
+//addSingleButton Click event
+$("#addSingleButton").click(function(){
+  var x=$("#theatrenames option:selected").text();
+  selectedTheatres.push(x);
+  $("#selectedtheatrenames").append('<option>'+x+'</option>');
+  $("#theatrenames option:selected").remove();
+});
+$("#editaddSingleButton").click(function(){
+  var flag=0;
+  var x=$("#edittheatrenames option:selected").text();
+  for(i=0;i<editselectedTheatres.length;i++){
+    if(x==editselectedTheatres[i]){
+      flag=1;
+    }
+  }
+  if(flag==1){
+    alert(x+" is already added.");
+  }
+  else{
+  editnewselectedTheatres.push(x);
+  $("#editselectedtheatrenames").append('<option>'+x+'</option>');
+  $("#edittheatrenames option:selected").remove();
+  }
+});
+
+//removeSingleButton Click event
+$("#removeSingleButton").click(function(){
+  var x=$("#selectedtheatrenames option:selected").text();
+  var ind=selectedTheatres.indexOf(x);
+  selectedTheatres.splice(ind,1);
+  $("#theatrenames").append('<option>'+x+'</option>');
+  $("#selectedtheatrenames option:selected").remove();
+});
+$("#editremoveSingleButton").click(function(){
+  var x=$("#editselectedtheatrenames option:selected").text();
+  var ind=editnewselectedTheatres.indexOf(x);
+  editnewselectedTheatres.splice(ind,1);
+  $("#edittheatrenames").append('<option>'+x+'</option>');
+  $("#editselectedtheatrenames option:selected").remove();
+});
+
+//addAllButton Click event
+$("#addAllButton").click(function(){
+  $("#theatrenames option").each(function(){
+    $("#selectedtheatrenames").append('<option>'+$(this).text()+'</option>');
+    selectedTheatres.push($(this).text());
+  });
+  $("#theatrenames option").remove();
+});
+
+//removeAllButton Click event
+$("#removeAllButton").click(function(){
+  $("#selectedtheatrenames option").each(function(){
+    $("#theatrenames").append('<option>'+$(this).text()+'</option>');
+  });
+  $("#selectedtheatrenames option").remove();
+  selectedTheatres=[];
+});
+
+  //Save selectedDates in array
+  $("#MovieDates.nav-pills>li").click(function() {
+      $(this).toggleClass("active");
+      var d = $(this).children("a").html().substring(51,60);
+      if($(this).hasClass("active")){
+        selectedDates.push(d);
+      }
+      else {
+        var ind = this.selectedDates.indexOf(d);
+        selectedDates.splice(ind,1);
+      }
+  });
+
+  $("#editMovieDates.nav-pills>li").click(function() {
+      $(this).toggleClass("active");
+      var d=$(this).children("a").html().substring(51,60);
+      if($(this).hasClass("active")){
+        editselectedDates.push(d);
+      }
+      else {
+        var ind=editselectedDates.indexOf(d);
+        editselectedDates.splice(ind,1);
+      }
+  });
+
+  $("#stMovieDates.nav-pills>li").click(function() {
+      $(this).toggleClass("active");
+      var d=$(this).children("a").html().substring(51,60);
+      if($(this).hasClass("active")){
+        stDates.push(d);
+      }
+      else {
+        var ind=stDates.indexOf(d);
+        stDates.splice(ind,1);
+      }
+  });
+
+
+//Populating show time drop down with values
+for(i=1; i<=12; i++){
+  if(i<10){
+  $("#hours").append('<option>0'+i+'</option>');
+  $("#edithours").append('<option>0'+i+'</option>');
+  $("#stedithours").append('<option>0'+i+'</option>');
+  }
+  else{
+  $("#hours").append('<option>'+i+'</option>');
+  $("#edithours").append('<option>'+i+'</option>');
+  $("#stedithours").append('<option>'+i+'</option>');
+ }
+}
+for(j=0; j<=55; j=j+5){
+  if(j<10){
+  $("#minutes").append('<option>0'+j+'</option>');
+  $("#editminutes").append('<option>0'+j+'</option>');
+  $("#steditminutes").append('<option>0'+j+'</option>');
+  }
+  else{
+  $("#minutes").append('<option>'+j+'</option>');
+  $("#editminutes").append('<option>'+j+'</option>');
+  $("#steditminutes").append('<option>'+j+'</option>');
+  }
+}
+//Remove Show timing
+  $("#ShowTime").on('click','li',function(){
+    var x=$(this).text();
+    var myind=showTimings.indexOf(x);
+    showTimings.splice(myind,1);
+    $(this).remove();
+  });
+  $("#EditShowTime").on('click','li',function(){
+    var x=$(this).text();
+    var myind=editshowTimings.indexOf(x);
+    editshowTimings.splice(myind,1);
+    $(this).remove();
+  });
+  $("#stEditShowTime").on('click','li',function(){
+    var x=$(this).text();
+    var myind=stShowTimings.indexOf(x);
+    stShowTimings.splice(myind,1);
+    $(this).remove();
+  });
+
+//Add Show Timing Button
+  $("#AddButton").click(function(){
+    var h=$("#hours option:selected").text();
+    var m=$("#minutes option:selected").text();
+    var x=$("#ampm option:selected").text();
+    if(h!="HH" && m!="MM"){
+    var time=h+':'+m+' '+x;
+    $("#ShowTime").append('<li><a href="#">'+time+'<span class="glyphicon glyphicon-remove"></span></a></li>');
+    showTimings.push(time);
+  }
+  else {
+    alert("Please select time");
+  }
+  });
+  $("#editAddButton").click(function(){
+    var h=$("#edithours option:selected").text();
+    var m=$("#editminutes option:selected").text();
+    var x=$("#editampm option:selected").text();
+    if(h!="HH" && m!="MM"){
+    var edittime=h+':'+m+' '+x;
+    $("#EditShowTime").append('<li><a href="#">'+edittime+'<span class="glyphicon glyphicon-remove"></span></a></li>');
+    editshowTimings.push(edittime);
+  }
+  else {
+    alert("Please select time");
+  }
+  });
+  $("#steditAddButton").click(function(){
+    var h=$("#stedithours option:selected").text();
+    var m=$("#steditminutes option:selected").text();
+    var x=$("#steditampm option:selected").text();
+    if(h!="HH" && m!="MM"){
+    var edittime=h+':'+m+' '+x;
+    $("#stEditShowTime").append('<li><a href="#">'+edittime+'<span class="glyphicon glyphicon-remove"></span></a></li>');
+    stShowTimings.push(edittime);
+  }
+  else {
+    alert("Please select time");
+  }
+  });
+
+  var allth=[];
+
+  window.BindData=function(){
+
+    $("#editselectedtheatrenames").val('');
+    $("#edittheatrenames").val('');
+
+    for(i=0; i<editselectedTheatres.length; i++){
+      $("#editselectedtheatrenames").append("<option disabled>"+editselectedTheatres[i]+"</option>")
+    }
+
+    for(var l=0;l<editAllTheatres.length;l++){
+        allth[l]=editAllTheatres[l].TheatreName+': '+editAllTheatres[l].Locality;
+    }
+    for(m=0;m<allth.length;m++){
+        $("#edittheatrenames").append("<option>"+allth[m]+"</option>")
+    }
+  }
+
+  window.BindSTData=function(){
+    $("#stEditShowTime").empty();
+    $("#stMovieDates>li").removeClass("active");
+    for(var j=1;j<=7;j++){
+      xx=$("#stMovieDates>li:nth-child("+j+")>a").html().substring(51,60);
+      var found = $.inArray(xx, stDates) > -1;
+      if(found){
+         $("#stMovieDates>li:nth-child("+j+")").addClass("active");
+      }
+    }
+    for(var k=0; k<stShowTimings.length; k++){
+      $("#stEditShowTime").append('<li><a href="#">'+stShowTimings[k]+'<span class="glyphicon glyphicon-remove"></span></a></li>');
+    }
+  }
+
+  $("#link2").click(function(){
+    alert(stShowTimings);
+  });
+
+
+});
+</script>

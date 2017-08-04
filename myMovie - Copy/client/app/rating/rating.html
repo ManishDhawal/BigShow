@@ -1,0 +1,61 @@
+<div class="container">
+  <h2 style="letter-spacing: 3px;">Rate Your Movie. <small>Share Your Experience.</small></h2>
+  <hr/>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div>
+        <img src="" alt="">
+        <p>Title</p>
+        <p>Genre</p>
+        <button class="btn btn-danger" data-target="#myModal">Rate Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="rateYo"></div>
+</div>
+
+<h2>Basic Modal Example</h2>
+ <!-- Trigger the modal with a button -->
+ <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+   <div class="modal-dialog">
+
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title">Modal Header</h4>
+       </div>
+       <div class="modal-body">
+
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+
+   </div>
+ </div>
+
+ <script>
+ $(function () {
+
+var $rateYo = $("#rateYo").rateYo({"rating": 0.7});
+
+/* set the option `onChange` */
+$rateYo.rateYo("option", "onChange", function () {
+
+  /* get the rated fill at the current point of time */
+  var ratedFill = $rateYo.rateYo("option", "ratedFill");
+
+  console.log("The color of rating is " + ratedFill);
+});
+
+/* set the option `multiColor` to show Multi Color Rating */
+$rateYo.rateYo("option", "multiColor", true);
+});
+</script>

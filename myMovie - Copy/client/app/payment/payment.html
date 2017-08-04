@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><h3><span class="glyphicon glyphicon-bookmark"></span> Confirm your contact details</h3></div>
+                <div class="panel-body">
+                      <form class="form-inline">
+                        <div class="form-group">
+                          <h4 style="color: black;">Enter details :</h4>
+                          <input type="text" class="form-control" ng-model="paymentCtrl.Name" placeholder="first name">
+                          <input type="text" class="form-control" ng-model="paymentCtrl.Contact" placeholder="contact number">
+                          <input type="email" class="form-control" ng-model="paymentCtrl.Email" placeholder="email">
+                        </div>
+                      </form>
+              </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+          <div class="panel-heading"><h3><span class="glyphicon glyphicon-bookmark"></span> Booking Summary</h3></div>
+              <div class="panel-body">
+                  <h4 id="Movieheading"></h4>
+                  <p id="MovLang"></p>
+                  <h4><p><span id="Cinema"></span>, <span id="CityName"></span></p></h4>
+                  <h5><span id="SeatClass"></span>, <span id="Seatno"></span></h5>
+                  <p>No. of Tickets - <span id="Ticketcount"></span> Tickets</p>
+                  <h4 id="Moviedate"></h4>
+                  <h5 id="ShowTime"></h5>
+                  <h4>Amount Payable - <h3 id="Amount"></h3></h4>
+              </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+              <div class="panel-heading"><h3><span class="glyphicon glyphicon-bookmark"></span> Payment</h3></div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-4">
+
+                    <div class="form-group">
+                      <input type="text" required class="form-control card-input" size="16"  placeholder="Card Number">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" required class="form-control card-input" size="16"  placeholder="Name of the Card Holder">
+                    </div>
+
+                    <form action="" class="form-inline">
+                    <div class="form-group">
+                      <select class="form-control" id="Month">
+                        <option value="MM">MM</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                      </select>
+                      <input type="text" class="form-control" placeholder="YYYY" size="4">
+                    </div>
+                  </form> <br>
+
+                  <div class="form-group">
+                    <input class="form-control cvv" type="password" placeholder="CVV">
+                  </div>
+
+                  <button class="btn btn-warning" data-toggle="modal" data-target="#myModal" ng-click="paymentCtrl.addPaymentDetails()">Pay Now</button>
+                  <a href="/" onclick="confirm('Are you sure you want to abort the payment?')" id="cancel"><button class="btn btn-danger">Cancel</button></a><br>
+                  <small>By clicking on Pay Now, you agree to our terms & conditions.</small>
+                  </div>
+
+                  <div class="col-md-8">
+                    <div class="tiles">
+                    <img class="img image-responsive" src="../../assets/images/payment1.png" alt="payment1">
+                    <img class="img image-responsive" src="../../assets/images/payment2.png" alt="payment2">
+                    <img class="img image-responsive" src="../../assets/images/payment3.png" alt="payment3">
+                    <img class="img image-responsive" src="../../assets/images/payment4.png" alt="payment4">
+                    <img class="img image-responsive" src="../../assets/images/payment5.png" alt="payment5">
+                    <img class="img image-responsive" src="../../assets/images/payment6.png" alt="payment6">
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-2" id="lock">
+                        <img class=""="image-responsive" src="../../assets/images/lock.png" alt="payment-lock">
+                      </div>
+                      <div class="col-md-6">
+                        <small><em>What, well you mean like a date? Doc? Am I to understand you're still hanging around with Doctor Emmett Brown,
+                           McFly? Tardy slip for you, Miss Parker. And one for you McFly I believe that makes four in a row. Now let me give you
+                           a nickle's worth of advice, young man. This so called Doctor Brown is dangerous, he's a real nuttcase.</em></small>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Thank You <span class="glyphicon glyphicon-thumbs-up"></span></h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <img src="../../assets/images/download.png" width="200" height="200" alt="thankyou-tick">
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Your ticket has been confirmed!!</h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+       <small>You can now go back to homepage by clicking this</small> <a href="/" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-chevron-left"></span> Go Back</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+    $("#MakePaymentButton").click(function(){
+
+      });
+
+        document.getElementById("Movieheading").innerHTML=sessionStorage.getItem("MovieName");
+        document.getElementById("Cinema").innerHTML=sessionStorage.getItem("Cinema");
+        document.getElementById("CityName").innerHTML=sessionStorage.getItem("City");
+        document.getElementById("SeatClass").innerHTML=sessionStorage.getItem("Class");
+        document.getElementById("Seatno").innerHTML=sessionStorage.getItem("SeatNos");
+        document.getElementById("ShowTime").innerHTML=sessionStorage.getItem("ShowTime");
+        document.getElementById("Ticketcount").innerHTML=sessionStorage.getItem("NoofSeats");
+        var d = new Date(sessionStorage.getItem("Moviedate"));
+        document.getElementById("Moviedate").innerHTML=d.toString().substring(0,16);
+        var st=parseInt(sessionStorage.getItem("Subtotal"));
+        document.getElementById("SubTotal").innerHTML=st;
+        document.getElementById("Fees").innerHTML=st*5/100;
+        document.getElementById("Amount").innerHTML="Rs. "+sessionStorage.getItem("Amt");
+
+</script>

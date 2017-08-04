@@ -1,0 +1,94 @@
+<div class="navbar navbar-default navbar-static-top" style="background-color: #2a2b2d; color: white; border-bottom: none;" ng-controller="NavbarController">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">DASHBOARD <span class="glyphicon glyphicon-off" style="margin-left: 45px;"></span></a>
+          <a href="/movie"><span class="glyphicon glyphicon-star"></span> Manage Movies</a>
+          <a href="/theatre"><span class="glyphicon glyphicon-film"></span> Manage Theatres</a>
+          <a href="/mapping"><span class="glyphicon glyphicon-retweet"></span> Manage Mappings</a>
+          <a href="/rating"><span class="glyphicon glyphicon-flag"></span> Movie Ratings</a>
+
+      </div>
+      <span ng-show="nav.isAdmin()" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      <a href="/" class="navbar-brand"><img src="../../assets/images/logo-footer.jpg" width="100px" alt="brand-logo"></a>
+    </div>
+    <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in nav.menu" ng-class="{active: nav.isActive(item.link)}">
+            <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-show="nav.isLoggedIn()" ><a href="/rating"><span class="glyphicon glyphicon-flag"></span> Movie Ratings</a></li>
+        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <li ng-hide="nav.isLoggedIn()" ng-class="{active: nav.isActive('/login')}"><a href="/login">Login</a></li>
+        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
+        <li ng-show="nav.isLoggedIn()" ng-class="{active: nav.isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="nav.isLoggedIn()"><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+<style>
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(215,38,61,0.9);
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: black;
+    display: block;
+    border: none;
+    background-color: rgba(211, 211, 211, 0.2);
+}
+
+.sidenav .closebtn {
+  /*  position: absolute; */
+    top: 2px;
+
+    font-size: 20px;
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>

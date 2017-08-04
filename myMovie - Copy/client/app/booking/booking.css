@@ -1,0 +1,90 @@
+.fifa {
+  display: block;
+  color: gold;
+  border-bottom: 2px solid gold;
+}
+
+.seat {
+  background-color: gold;
+  display: block;
+  text-align: center;
+  vertical-align: text-top;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  }
+
+  .seat:hover {
+    cursor: pointer;
+
+    opacity: 0.5;
+    color: white;
+    transition: .5s ease;
+  }
+
+  .screen {
+  text-align: center;
+  font-size: 30px;
+  width: 465px;
+  height: 50px;
+  display: block;
+  margin-bottom: 70px;
+  border: none;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+.well1 {
+  margin-bottom: 0px;
+  border-radius: 20px;
+  border-color: gold;
+  background-color: #292e42;
+}
+
+.SeatLayout {
+  display: block;
+  padding: 20px 0px 50px 90px;
+  border: 1px solid gold;
+  border-radius: 5px;
+  background-color: #292e42;
+}
+
+.bob {
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: none;
+}
+
+.cancel_book{background:#CCC;}
+
+
+.green {
+  background-color: pink;
+}
+.red{background:red;}
+
+
+.bloc {
+  display: block;
+  border: none;
+  width: 15px;
+  height: 15px;
+  background-color: azure;
+  border-radius: 3px;
+}
+
+
+.bloc:hover {
+  cursor: pointer;
+}
+
+
+.blue {
+  background-color: blue;
+}

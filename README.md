@@ -1,6 +1,6 @@
-# manishdhawal.movieproject
+# BigShow - A movie ticket booking application based on [meanjs/mean](https://github.com/meanjs/mean)
 
-This is fully fledged website which runs on MEAN stack bundle i.e, this application is fast, robust and easily maintainable.
+This is a fully fledged website which runs on MEAN stack bundle i.e, this application is fast, robust and easily maintainable.
 
 It is a basically a movie ticket booking web application. In here, you can book a ticket, and cancel it. You can add feedback for a movie.
 

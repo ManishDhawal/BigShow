@@ -31,7 +31,7 @@ BigShow is a Pulic Web Appliaction and a full-stack JavaScript open-soource solu
   
 ## Online Support
 
-* Post an [Issue](https://github.com/ManishDhawal/BigShow/issues)
+* Post an [Issue](https://github.com/ManishDhawal/BigShow/issues/new)
 * Email to [ManishDhawal](mailto:manishdhawal88@gmail.com)
 * SkypeID: live:manishdhawal88
 
